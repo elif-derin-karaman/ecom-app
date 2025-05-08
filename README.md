@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E-Commerce Web Application
+
+This is an e-commerce web application built with React, Next.js, Node.js, and Bootstrap for CS391 Web Application Development course.
+
+## Features
+
+- Home page with product listings, search, sort, and campaign carousel
+- Product detail page with reviews and ratings
+- Shopping cart functionality
+- Campaign management
+
+## Technologies Used
+
+- React.js
+- Next.js
+- Bootstrap & React Bootstrap
+- JSON Server for RESTful API
+- Axios for HTTP requests
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js (v14 or higher)
+- npm (v6 or higher)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository or extract the archive file
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-## Learn More
+3. Start the application (both frontend and backend):
+   ```
+   npm run dev:all
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+This will start:
+- Next.js development server on http://localhost:3000
+- JSON Server on http://localhost:3001
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `/app`: Next.js application pages and components
+- `/app/components`: Reusable React components
+- `/data`: JSON data for the backend
+- `/public`: Static assets
 
-## Deploy on Vercel
+## Pages
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Home Page** (`/app/page.tsx`): 
+   - Displays products with search and sort functionality
+   - Shows campaign carousel
+   - Allows adding products to cart
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Product Detail Page** (`/app/product/[id]/page.tsx`):
+   - Shows detailed product information
+   - Displays reviews and allows adding new reviews
+   - Allows adding product to cart with quantity selection
+
+3. **Shopping Cart Page** (`/app/cart/page.tsx`):
+   - Lists cart items with quantity controls
+   - Allows adding special notes for each product
+   - Calculates subtotal, delivery fee, and total
+   - Provides checkout functionality
+
+4. **Add Campaign Page** (`/app/add-campaign/page.tsx`):
+   - Form to create new campaigns
+   - Shows existing campaigns
+   - Allows selecting products for the campaign
+
+## API Endpoints
+
+The application uses JSON Server for the backend with the following endpoints:
+
+- `GET /products`: Get all products
+- `GET /products/:id`: Get a specific product
+- `GET /campaigns`: Get all campaigns
+- `POST /campaigns`: Create a new campaign
+- `GET /cart`: Get cart items
+- `POST /cart`: Add item to cart
+- `PUT /cart/:id`: Update cart item
+- `DELETE /cart/:id`: Remove item from cart
+- `GET /reviews`: Get all reviews
+- `GET /reviews?productId=:id`: Get reviews for a specific product
+- `POST /reviews`: Add a new review
