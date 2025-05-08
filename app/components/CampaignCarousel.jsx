@@ -4,17 +4,8 @@ import { useState, useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import axios from 'axios';
 
-interface Campaign {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  productIds: number[];
-  discountPercentage: number;
-}
-
 const CampaignCarousel = () => {
-  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

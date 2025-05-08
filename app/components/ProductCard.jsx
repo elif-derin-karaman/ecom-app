@@ -5,16 +5,7 @@ import { Card, Button, Form, Badge } from 'react-bootstrap';
 import Link from 'next/link';
 import axios from 'axios';
 
-interface ProductProps {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  image: string;
-  discount?: number;
-}
-
-const ProductCard = ({ id, title, description, price, image, discount = 0 }: ProductProps) => {
+const ProductCard = ({ id, title, description, price, image, discount = 0 }) => {
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
 

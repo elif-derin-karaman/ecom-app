@@ -4,19 +4,14 @@ import { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 
-interface ReviewFormProps {
-  productId: number;
-  onReviewAdded: () => void;
-}
-
-const ReviewForm = ({ productId, onReviewAdded }: ReviewFormProps) => {
+const ReviewForm = ({ productId, onReviewAdded }) => {
   const [username, setUsername] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(5);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!username || !content) {

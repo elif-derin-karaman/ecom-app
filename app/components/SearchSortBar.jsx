@@ -2,16 +2,6 @@
 
 import { Form, Row, Col, Button } from 'react-bootstrap';
 
-interface SearchSortBarProps {
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
-  sortOption: string;
-  setSortOption: (option: string) => void;
-  categoryFilter: string;
-  setCategoryFilter: (category: string) => void;
-  categories: string[];
-}
-
 const SearchSortBar = ({
   searchTerm,
   setSearchTerm,
@@ -20,9 +10,9 @@ const SearchSortBar = ({
   categoryFilter,
   setCategoryFilter,
   categories
-}: SearchSortBarProps) => {
+}) => {
 
-  const handleCategoryChange = (category: string) => {
+  const handleCategoryChange = (category) => {
     setCategoryFilter(category);
     setSearchTerm('');
     setSortOption('');

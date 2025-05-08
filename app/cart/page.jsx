@@ -5,20 +5,10 @@ import { Container, Table, Button, Form, Card, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import Link from 'next/link';
 
-interface CartItem {
-  id: number;
-  productId: number;
-  title: string;
-  price: number;
-  image: string;
-  quantity: number;
-  note: string;
-}
-
 export default function ShoppingCart() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [notes, setNotes] = useState<Record<number, string>>({});
+  const [notes, setNotes] = useState({});
   const [showCheckout, setShowCheckout] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
 
@@ -28,8 +18,8 @@ export default function ShoppingCart() {
       setCartItems(response.data);
       
       // Initialize notes from cart items
-      const initialNotes: Record<number, string> = {};
-      response.data.forEach((item: CartItem) => {
+      const initialNotes = {};
+      response.data.forEach((item) => {
         initialNotes[item.id] = item.note || '';
       });
       setNotes(initialNotes);
@@ -44,7 +34,7 @@ export default function ShoppingCart() {
     fetchCart();
   }, []);
 
-  const updateQuantity = async (itemId: number, newQuantity: number) => {
+  const updateQuantity = async (itemId, newQuantity) => {
     if (newQuantity < 1) return;
     
     try {
@@ -65,7 +55,7 @@ export default function ShoppingCart() {
     }
   };
 
-  const updateNote = async (itemId: number) => {
+  const updateNote = async (itemId) => {
     try {
       const item = cartItems.find(item => item.id === itemId);
       if (!item) return;
@@ -84,7 +74,7 @@ export default function ShoppingCart() {
     }
   };
 
-  const removeItem = async (itemId: number) => {
+  const removeItem = async (itemId) => {
     try {
       await axios.delete(`http://localhost:3001/cart/${itemId}`);
       

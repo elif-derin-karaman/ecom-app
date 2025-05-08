@@ -4,4 +4,4 @@ const nextConfig = {
   transpilePackages: ['react-bootstrap'],
 };
 
-export default nextConfig; 
+module.exports = nextConfig; 

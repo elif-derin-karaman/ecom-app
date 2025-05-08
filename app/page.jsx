@@ -7,29 +7,14 @@ import CampaignCarousel from './components/CampaignCarousel';
 import SearchSortBar from './components/SearchSortBar';
 import ProductCard from './components/ProductCard';
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  image: string;
-  category: string;
-}
-
-interface Campaign {
-  id: number;
-  productIds: number[];
-  discountPercentage: number;
-}
-
 export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  const [products, setProducts] = useState([]);
+  const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +24,7 @@ export default function Home() {
           axios.get('http://localhost:3001/campaigns')
         ]);
         
-        const productsData = productsResponse.data as Product[];
+        const productsData = productsResponse.data;
         setProducts(productsData);
         setCampaigns(campaignsResponse.data);
         
@@ -56,7 +41,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const getProductDiscount = (productId: number) => {
+  const getProductDiscount = (productId) => {
     const campaign = campaigns.find(c => c.productIds.includes(productId));
     return campaign ? campaign.discountPercentage : 0;
   };
@@ -127,4 +112,4 @@ export default function Home() {
       </Row>
     </div>
   );
-}
+} 

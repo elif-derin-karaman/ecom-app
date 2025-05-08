@@ -4,23 +4,8 @@ import { useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 import axios from 'axios';
 
-interface Review {
-  id: number;
-  productId: number;
-  username: string;
-  title: string;
-  content: string;
-  rating: number;
-  date: string;
-}
-
-interface ReviewsListProps {
-  productId: number;
-  refreshTrigger: number;
-}
-
-const ReviewsList = ({ productId, refreshTrigger }: ReviewsListProps) => {
-  const [reviews, setReviews] = useState<Review[]>([]);
+const ReviewsList = ({ productId, refreshTrigger }) => {
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,7 +24,7 @@ const ReviewsList = ({ productId, refreshTrigger }: ReviewsListProps) => {
     fetchReviews();
   }, [productId, refreshTrigger]);
 
-  const renderStars = (rating: number) => {
+  const renderStars = (rating) => {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   };
 

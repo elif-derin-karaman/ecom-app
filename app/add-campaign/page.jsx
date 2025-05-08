@@ -4,22 +4,16 @@ import { useState, useEffect } from 'react';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 import axios from 'axios';
 
-interface Product {
-  id: number;
-  title: string;
-  image: string;
-}
-
 export default function AddCampaign() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [discountPercentage, setDiscountPercentage] = useState(10);
-  const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
-  const [products, setProducts] = useState<Product[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [campaigns, setCampaigns] = useState<any[]>([]);
+  const [campaigns, setCampaigns] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +35,7 @@ export default function AddCampaign() {
     fetchData();
   }, []);
 
-  const handleProductToggle = (productId: number) => {
+  const handleProductToggle = (productId) => {
     setSelectedProducts(prevSelected => {
       if (prevSelected.includes(productId)) {
         return prevSelected.filter(id => id !== productId);
@@ -51,7 +45,7 @@ export default function AddCampaign() {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!title || !description || !image || selectedProducts.length === 0) {

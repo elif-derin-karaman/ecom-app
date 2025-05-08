@@ -7,27 +7,13 @@ import axios from 'axios';
 import ReviewForm from '../../components/ReviewForm';
 import ReviewsList from '../../components/ReviewsList';
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  image: string;
-}
-
-interface Campaign {
-  id: number;
-  productIds: number[];
-  discountPercentage: number;
-}
-
 export default function ProductDetail() {
   const params = useParams();
   const router = useRouter();
   const productId = Number(params.id);
   
-  const [product, setProduct] = useState<Product | null>(null);
-  const [campaign, setCampaign] = useState<Campaign | null>(null);
+  const [product, setProduct] = useState(null);
+  const [campaign, setCampaign] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [isAdding, setIsAdding] = useState(false);
@@ -45,7 +31,7 @@ export default function ProductDetail() {
         
         // Find campaign for this product
         const productCampaign = campaignsResponse.data.find(
-          (c: Campaign) => c.productIds.includes(productId)
+          (c) => c.productIds.includes(productId)
         );
         
         setCampaign(productCampaign || null);

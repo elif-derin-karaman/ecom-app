@@ -5,15 +5,6 @@ import { Navbar, Container, Nav, Badge } from 'react-bootstrap';
 import Link from 'next/link';
 import axios from 'axios';
 
-interface CartItem {
-  id: number;
-  productId: number;
-  title: string;
-  price: number;
-  image: string;
-  quantity: number;
-}
-
 const NavigationBar = () => {
   const [cartCount, setCartCount] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
@@ -22,13 +13,13 @@ const NavigationBar = () => {
     const fetchCartData = async () => {
       try {
         const response = await axios.get('http://localhost:3001/cart');
-        const cartItems = response.data as CartItem[];
+        const cartItems = response.data;
         
         // Update cart count
         setCartCount(cartItems.length);
         
         // Calculate total amount
-        const total = cartItems.reduce((sum: number, item: CartItem) => sum + (item.price * item.quantity), 0);
+        const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         setCartTotal(total);
       } catch (error) {
         console.error('Error fetching cart:', error);
