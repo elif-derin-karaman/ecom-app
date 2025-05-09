@@ -66,14 +66,12 @@ export default function AddCampaign() {
       
       alert('Campaign added successfully!');
       
-      // Reset form
       setTitle('');
       setDescription('');
       setImage('');
       setDiscountPercentage(10);
       setSelectedProducts([]);
       
-      // Refresh campaigns
       const campaignsResponse = await axios.get('http://localhost:3001/campaigns');
       setCampaigns(campaignsResponse.data);
     } catch (error) {

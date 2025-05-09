@@ -19,8 +19,7 @@ const SearchSortBar = ({
   };
 
   const handleListClick = () => {
-    // This will trigger filtering with current settings
-    // No need to add functionality as the parent component will react to state changes
+
   };
 
   return (

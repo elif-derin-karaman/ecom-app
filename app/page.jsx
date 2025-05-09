@@ -28,7 +28,6 @@ export default function Home() {
         setProducts(productsData);
         setCampaigns(campaignsResponse.data);
         
-        // Extract unique categories
         const uniqueCategories = [...new Set(productsData.map(product => product.category))];
         setCategories(uniqueCategories);
       } catch (error) {
@@ -46,12 +45,10 @@ export default function Home() {
     return campaign ? campaign.discountPercentage : 0;
   };
 
-  // First apply category filter
   const categoryFilteredProducts = categoryFilter 
     ? products.filter(product => product.category === categoryFilter)
     : products;
 
-  // Then apply search filter on the category filtered products
   const searchFilteredProducts = searchTerm 
     ? categoryFilteredProducts.filter(product => 
         product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -59,7 +56,6 @@ export default function Home() {
       )
     : categoryFilteredProducts;
 
-  // Finally apply sorting on the filtered products
   const sortedProducts = [...searchFilteredProducts].sort((a, b) => {
     if (sortOption === 'price_asc') {
       return a.price - b.price;

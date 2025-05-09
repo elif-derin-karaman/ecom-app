@@ -15,10 +15,8 @@ const NavigationBar = () => {
         const response = await axios.get('http://localhost:3001/cart');
         const cartItems = response.data;
         
-        // Update cart count
         setCartCount(cartItems.length);
         
-        // Calculate total amount
         const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         setCartTotal(total);
       } catch (error) {
@@ -27,8 +25,7 @@ const NavigationBar = () => {
     };
 
     fetchCartData();
-    
-    // Set up interval to check cart data periodically
+  
     const interval = setInterval(fetchCartData, 3000);
     
     return () => clearInterval(interval);

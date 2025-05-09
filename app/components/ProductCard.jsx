@@ -16,18 +16,15 @@ const ProductCard = ({ id, title, description, price, image, discount = 0 }) => 
     
     setIsAdding(true);
     try {
-      // Check if product already in cart
       const cartResponse = await axios.get(`http://localhost:3001/cart?productId=${id}`);
       
       if (cartResponse.data.length > 0) {
-        // Update existing cart item
         const cartItem = cartResponse.data[0];
         await axios.put(`http://localhost:3001/cart/${cartItem.id}`, {
           ...cartItem,
           quantity: cartItem.quantity + quantity
         });
       } else {
-        // Add new cart item
         await axios.post('http://localhost:3001/cart', {
           productId: id,
           title,

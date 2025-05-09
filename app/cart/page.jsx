@@ -17,7 +17,6 @@ export default function ShoppingCart() {
       const response = await axios.get('http://localhost:3001/cart');
       setCartItems(response.data);
       
-      // Initialize notes from cart items
       const initialNotes = {};
       response.data.forEach((item) => {
         initialNotes[item.id] = item.note || '';
@@ -46,7 +45,6 @@ export default function ShoppingCart() {
         quantity: newQuantity
       });
       
-      // Update local state
       setCartItems(cartItems.map(item => 
         item.id === itemId ? { ...item, quantity: newQuantity } : item
       ));
@@ -65,7 +63,6 @@ export default function ShoppingCart() {
         note: notes[itemId] || ''
       });
       
-      // Update local state
       setCartItems(cartItems.map(item => 
         item.id === itemId ? { ...item, note: notes[itemId] || '' } : item
       ));
@@ -78,7 +75,6 @@ export default function ShoppingCart() {
     try {
       await axios.delete(`http://localhost:3001/cart/${itemId}`);
       
-      // Update local state
       setCartItems(cartItems.filter(item => item.id !== itemId));
     } catch (error) {
       console.error('Error removing item:', error);
@@ -87,12 +83,10 @@ export default function ShoppingCart() {
 
   const emptyCart = async () => {
     try {
-      // Delete all items one by one
       await Promise.all(cartItems.map(item => 
         axios.delete(`http://localhost:3001/cart/${item.id}`)
       ));
       
-      // Update local state
       setCartItems([]);
     } catch (error) {
       console.error('Error emptying cart:', error);
@@ -105,7 +99,6 @@ export default function ShoppingCart() {
 
   const handlePayment = async () => {
     try {
-      // Clear the cart
       await emptyCart();
       setShowCheckout(false);
       setShowThankYou(true);
