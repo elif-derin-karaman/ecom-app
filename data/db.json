@@ -178,16 +178,7 @@
       "discountPercentage": 20
     }
   ],
-  "cart": [
-    {
-      "id": "2302",
-      "productId": "3",
-      "title": "Wireless Headphones",
-      "price": 349.99,
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000&auto=format&fit=crop",
-      "quantity": 2
-    }
-  ],
+  "cart": [],
   "reviews": [
     {
       "id": "9212",
