@@ -22,14 +22,28 @@ const ReviewForm = ({ productId, onReviewAdded }) => {
     setIsSubmitting(true);
     
     try {
-      await axios.post('http://localhost:3001/reviews', {
-        productId,
+      // First, get the current product data
+      const productResponse = await axios.get(`http://localhost:3001/products/${productId}`);
+      const product = productResponse.data;
+      
+      // Create the new review
+      const newReview = {
+        id: Date.now().toString(), // Generate a unique ID
         username,
         title,
         content,
         rating,
         date: new Date().toISOString()
-      });
+      };
+      
+      // Add the new review to the product's reviews array
+      const updatedProduct = {
+        ...product,
+        reviews: [...(product.reviews || []), newReview]
+      };
+      
+      // Update the product with the new review
+      await axios.put(`http://localhost:3001/products/${productId}`, updatedProduct);
       
       setUsername('');
       setTitle('');

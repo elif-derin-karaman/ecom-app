@@ -12,8 +12,8 @@ const ReviewsList = ({ productId, refreshTrigger }) => {
     const fetchReviews = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:3001/reviews?productId=${productId}`);
-        setReviews(response.data);
+        const response = await axios.get(`http://localhost:3001/products/${productId}`);
+        setReviews(response.data.reviews || []);
       } catch (error) {
         console.error('Error fetching reviews:', error);
       } finally {
